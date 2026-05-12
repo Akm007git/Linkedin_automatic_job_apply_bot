@@ -1,17 +1,12 @@
 '''
-Author:     Sai Vignesh Golla
-LinkedIn:   https://www.linkedin.com/in/saivigneshgolla/
+Author:     Anup Kumar Mahata
+LinkedIn:   https://www.linkedin.com/in/anup-kumar-mahata-76952b246/
 
-Copyright (C) 2024 Sai Vignesh Golla
-
-License:    GNU Affero General Public License
-            https://www.gnu.org/licenses/agpl-3.0.en.html
+Copyright (C) 2024 Anup Kumar Mahata
             
-GitHub:     https://github.com/GodsScion/Auto_job_applier_linkedIn
+GitHub:     https://github.com/Akm007git/Linkedin_automatic_job_apply_bot
 
-Support me: https://github.com/sponsors/GodsScion
-
-version:    24.12.3.10.30
+version : 
 '''
 
 
@@ -19,8 +14,8 @@ version:    24.12.3.10.30
 
 
 # Login Credentials for LinkedIn (Optional)
-username = "username@example.com"       # Enter your username in the quotes
-password = "example_password"           # Enter your password in the quotes
+username = "anupkumarmahata2022@outlook.com"       # Enter your username in the quotes
+password = "Ak@123456"           # Enter your password in the quotes
 
 
 ## Artificial Intelligence (Beta Not-Recommended)

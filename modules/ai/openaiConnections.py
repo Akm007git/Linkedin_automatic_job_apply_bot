@@ -1,17 +1,12 @@
 '''
-Author:     Sai Vignesh Golla
-LinkedIn:   https://www.linkedin.com/in/saivigneshgolla/
+Author:     Anup Kumar Mahata
+LinkedIn:   https://www.linkedin.com/in/anup-kumar-mahata-76952b246/
 
-Copyright (C) 2024 Sai Vignesh Golla
-
-License:    GNU Affero General Public License
-            https://www.gnu.org/licenses/agpl-3.0.en.html
+Copyright (C) 2024 Anup Kumar Mahata
             
-GitHub:     https://github.com/GodsScion/Auto_job_applier_linkedIn
+GitHub:     https://github.com/Akm007git/Linkedin_automatic_job_apply_bot
 
-Support me: https://github.com/sponsors/GodsScion
-
-version:    26.01.20.5.08
+version : 
 '''
 
 
