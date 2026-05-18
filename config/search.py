@@ -17,7 +17,7 @@ version :
 search_terms = ["Software Engineer", "Software Developer", "AI Engineer", "Full Stack Developer", "Generative AI Engineer"]
 
 # Search location, this will be filled in "City, state, or zip code" search box. If left empty as "", tool will not fill it.
-search_location = ["Bangalore","Kolkata","hyderabad"]               # Some valid examples: "", "United States", "India", "Chicago, Illinois, United States", "90001, Los Angeles, California, United States", "Bengaluru, Karnataka, India", etc.
+search_location = "Bangalore"             # Some valid examples: "", "United States", "India", "Chicago, Illinois, United States", "90001, Los Angeles, California, United States", "Bengaluru, Karnataka, India", etc.
 
 # After how many number of applications in current search should the bot switch to next search? 
 switch_number = 20                 # Only numbers greater than 0... Don't put in quotes
@@ -49,9 +49,9 @@ salary = "1500000+"                        # "$40,000+", "$60,000+", "$80,000+",
 
 easy_apply_only = True             # True or False, Note: True or False are case-sensitive
 
-experience_level = ["Associate","Mid-Senior level","Experienced"]              # (multiple select) "Internship", "Entry level", "Associate", "Mid-Senior level", "Director", "Executive"
+experience_level = ["Associate","Mid-Senior level"]             # (multiple select) "Internship", "Entry level", "Associate", "Mid-Senior level", "Director", "Executive"
 job_type = ["Full-time"]                      # (multiple select) "Full-time", "Part-time", "Contract", "Temporary", "Volunteer", "Internship", "Other"
-on_site = ["on-site","remote","hybrid"]                       # (multiple select) "On-site", "Remote", "Hybrid"
+on_site = ["On-site","Remote","Hybrid"]                       # (multiple select) "On-site", "Remote", "Hybrid"
 
 companies = []                     # (dynamic multiple select) make sure the name you type in list exactly matches with the company name you're looking for, including capitals. 
                                    # Eg: "7-eleven", "Google","X, the moonshot factory","YouTube","CapitalG","Adometry (acquired by Google)","Meta","Apple","Byte Dance","Netflix", "Snowflake","Mineral.ai","Microsoft","JP Morgan","Barclays","Visa","American Express", "Snap Inc", "JPMorgan Chase & Co.", "Tata Consultancy Services", "Recruiting from Scratch", "Epic", and so on...
