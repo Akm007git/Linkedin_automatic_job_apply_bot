@@ -1,5 +1,3 @@
-
-
 from modules.helpers import get_default_temp_profile, make_directories
 from config.settings import run_in_background, stealth_mode, disable_extensions, safe_mode, file_name, failed_file_name, logs_folder_path, generated_resume_path
 from config.questions import default_resume_path
@@ -13,6 +11,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from modules.helpers import find_default_profile_directory, critical_error_log, print_lg
 from selenium.common.exceptions import SessionNotCreatedException
+import os
+import ssl
 
 def createChromeSession(isRetry: bool = False):
     make_directories([file_name,failed_file_name,logs_folder_path+"/screenshots",default_resume_path,generated_resume_path+"/temp"])
@@ -58,4 +58,4 @@ except Exception as e:
     alert(msg, "Error in opening chrome")
     try: driver.quit()
     except NameError: exit()
-    
+

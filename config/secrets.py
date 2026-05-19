@@ -12,10 +12,10 @@ version :
 
 ###################################################### CONFIGURE YOUR TOOLS HERE ######################################################
 
-
+import os
 # Login Credentials for LinkedIn (Optional)
-username = "anupkumar.mahata.ai@gmail.com"       # Enter your username in the quotes
-password = "Akm@252580"           # Enter your password in the quotes
+username = os.getenv("LN_USERNAME", "") # Enter your email in the quotes Eg: "your_email@example.com"
+password = os.getenv("LN_PASSWORD", "") # Enter your password in the quotes
 
 
 ## Artificial Intelligence (Beta Not-Recommended)

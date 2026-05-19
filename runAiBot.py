@@ -125,20 +125,39 @@ def login_LN() -> None:
         print_lg("User did not configure username and password in secrets.py, hence can't login automatically! Please login manually!")
         manual_login_retry(is_logged_in_LN, 2)
         return
+    def enter_login_field(locators: list[tuple], value: str, field_name: str) -> bool:
+        for by, selector in locators:
+            try:
+                field = wait.until(EC.presence_of_element_located((by, selector)))
+                field.clear()
+                field.send_keys(value)
+                return True
+            except Exception:
+                continue
+        print_lg(f"Couldn't find {field_name} field using any known locator.")
+        return False
+
     try:
         wait.until(EC.presence_of_element_located((By.LINK_TEXT, "Forgot password?")))
+        print_lg("Login page loaded. Current URL:", driver.current_url)
+        enter_login_field(
+            [(By.ID, "username"), (By.NAME, "session_key")],
+            username,
+            "username"
+        )
+        enter_login_field(
+            [(By.ID, "password"), (By.NAME, "session_password")],
+            password,
+            "password"
+        )
         try:
-            text_input_by_ID(driver, "username", username, 1)
-        except Exception as e:
-            print_lg("Couldn't find username field.")
-            # print_lg(e)
-        try:
-            text_input_by_ID(driver, "password", password, 1)
-        except Exception as e:
-            print_lg("Couldn't find password field.")
-            # print_lg(e)
-        # Find the login submit button and click it
-        driver.find_element(By.XPATH, '//button[@type="submit" and contains(text(), "Sign in")]').click()
+            driver.find_element(By.XPATH, '//button[@type="submit" and contains(text(), "Sign in")]').click()
+        except Exception:
+            print_lg("Couldn't find Sign in button. Attempting fallback click.")
+            try:
+                driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
+            except Exception:
+                print_lg("Couldn't find any submit button on the login page.")
     except Exception as e1:
         try:
             profile_button = find_by_class(driver, "profile__details")
