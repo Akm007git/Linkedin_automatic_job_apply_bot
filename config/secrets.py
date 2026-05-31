@@ -14,8 +14,8 @@ version :
 
 import os
 # Login Credentials for LinkedIn (Optional)
-username = os.getenv("LN_USERNAME", "") # Enter your email in the quotes Eg: "your_email@example.com"
-password = os.getenv("LN_PASSWORD", "") # Enter your password in the quotes
+username = os.getenv("LN_USERNAME", "username@example.com") # Enter your email in the quotes Eg: "your_email@example.com"
+password = os.getenv("LN_PASSWORD", "example_password") # Enter your password in the quotes
 
 
 ## Artificial Intelligence (Beta Not-Recommended)

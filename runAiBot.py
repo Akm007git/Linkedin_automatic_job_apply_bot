@@ -16,6 +16,7 @@ import csv
 import re
 import time
 import pyautogui
+from urllib.parse import quote_plus
 
 # Set CSV field size limit to prevent field size errors
 csv.field_size_limit(1000000)  # Set to 1MB instead of default 131KB
@@ -202,8 +203,21 @@ def set_search_location() -> None:
     if search_location.strip():
         try:
             print_lg(f'Setting search location as: "{search_location.strip()}"')
-            search_location_ele = try_xp(driver, ".//input[@aria-label='City, state, or zip code'and not(@disabled)]", False) #  and not(@aria-hidden='true')]")
-            text_input(actions, search_location_ele, search_location, "Search Location")
+            location_xpaths = [
+                ".//input[@aria-label='City, state, or zip code' and not(@disabled)]",
+                ".//input[contains(@aria-label, 'City') and not(@disabled)]",
+                ".//input[contains(@id, 'jobs-search-box-location') and not(@disabled)]",
+                ".//input[contains(@class, 'jobs-search-box__text-input') and not(@disabled)][2]",
+            ]
+            search_location_ele = False
+            for xpath in location_xpaths:
+                search_location_ele = try_xp(driver, xpath, False)
+                if search_location_ele:
+                    break
+            if search_location_ele:
+                text_input(actions, search_location_ele, search_location, "Search Location")
+            else:
+                print_lg("Search Location input was not found. Continuing with location from search URL.")
         except ElementNotInteractableException:
             try_xp(driver, ".//label[@class='jobs-search-box__input-icon jobs-search-box__keywords-label']")
             actions.send_keys(Keys.TAB, Keys.TAB).perform()
@@ -887,7 +901,12 @@ def apply_to_jobs(search_terms: list[str]) -> None:
 
     if randomize_search_order:  shuffle(search_terms)
     for searchTerm in search_terms:
-        driver.get(f"https://www.linkedin.com/jobs/search/?keywords={searchTerm}")
+        encoded_search_term = quote_plus(searchTerm)
+        encoded_location = quote_plus(search_location.strip())
+        search_url = f"https://www.linkedin.com/jobs/search/?keywords={encoded_search_term}"
+        if encoded_location:
+            search_url += f"&location={encoded_location}"
+        driver.get(search_url)
         print_lg("\n________________________________________________________________________________________________________________________\n")
         print_lg(f'\n>>>> Now searching for "{searchTerm}" <<<<\n\n')
 
@@ -1201,6 +1220,8 @@ def main() -> None:
         tabs_count = len(driver.window_handles)
         driver.get("https://www.linkedin.com/login")
         if not is_logged_in_LN(): login_LN()
+        if not is_logged_in_LN():
+            raise RuntimeError("LinkedIn login was not confirmed. Please log in manually in the opened Chrome window, or set LN_USERNAME and LN_PASSWORD before running the bot.")
         
         linkedIn_tab = driver.current_window_handle
 
@@ -1286,7 +1307,7 @@ def main() -> None:
         if timeSaved > 0:
             timeSaved += 60
             timeSavedMsg = f"In this run, you saved approx {round(timeSaved/60)} mins ({timeSaved} secs), please consider supporting the project."
-        msg = f"{quotes}\n\n\n{timeSavedMsg}\nYou can also get your quote and name shown here, or prioritize your bug reports by supporting the project at:\n\nhttps://github.com/sponsors/GodsScion\n\n\nSummary:\n{summary}\n\n\nBest regards,\nSai Vignesh Golla\nhttps://www.linkedin.com/in/saivigneshgolla/\n\nTop Sponsors:\n{sponsors}"
+        msg = f"{quotes}\n\n\n{timeSavedMsg}\nYou can also get your quote and name shown here, or prioritize your bug reports by supporting the project at:\n\nhttps://github.com/sponsors/GodsScion\n\n\nSummary:\n{summary}"
         pyautogui.alert(msg, "Exiting..")
         print_lg(msg,"Closing the browser...")
         if tabs_count >= 10:
